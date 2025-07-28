@@ -1,0 +1,73 @@
+<div class="d-flex justify-content-center align-items-center vh-100 bg-light">
+  <div class="card p-4 shadow" style="width: 100%; max-width: 400px;">
+    <div class="text-center mb-3">
+      <h4 class="mt-2">Sign in</h4>
+    </div>
+
+    <div *ngIf="erreur" class="alert alert-danger">{{ erreur }}</div>
+    <div *ngIf="message" class="alert alert-success">{{ message }}</div>
+
+    <form (ngSubmit)="seConnecter()">
+      <div class="mb-3">
+        <label class="form-label">Email address</label>
+        <input
+          type="email"
+          class="form-control"
+          [(ngModel)]="email"
+          name="email"
+          required
+        />
+      </div>
+
+      <div class="mb-3">
+        <div class="d-flex justify-content-between align-items-center">
+          <label class="form-label mb-0">Password</label>
+          <a routerLink="/mail">Forgot password?</a>
+        </div>
+
+        <div class="input-group">
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            class="form-control"
+            [(ngModel)]="password"
+            name="password"
+            required
+          />
+          <button
+            *ngIf="password.length > 0"
+            type="button"
+            class="btn btn-outline-secondary"
+            (click)="togglePassword()"
+            tabindex="-1"
+            aria-label="Toggle password visibility"
+          >
+            <svg *ngIf="!showPassword" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                 viewBox="0 0 16 16">
+              <path
+                d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+            </svg>
+            <svg *ngIf="showPassword" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                 viewBox="0 0 16 16">
+              <path
+                d="M13.359 11.238l1.42 1.42a.5.5 0 0 1-.708.707l-1.42-1.42A8.354 8.354 0 0 1 8 13.5C3 13.5 0 8 0 8s1.479-2.71 3.781-4.53L1.146 1.854a.5.5 0 1 1 .708-.708l12 12a.5.5 0 0 1-.708.708l-1.787-1.787zM8 12.5c3.53 0 6.48-2.874 7.294-4.5C14.48 6.374 11.53 3.5 8 3.5c-.801 0-1.579.158-2.294.45l6.414 6.415c.293.362.551.738.803 1.12a.5.5 0 0 1-.707.707l-6.586-6.586a8.354 8.354 0 0 1-1.62 1.4z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="d-grid mt-4">
+        <button type="submit" class="btn btn-success" [disabled]="!loginFormValid()">Sign in</button>
+      </div>
+    </form>
+
+    <div class="separator my-3">
+      <hr />
+      <span class="px-2 text-muted">or</span>
+      <hr />
+    </div>
+
+    <div class="text-center">
+      New here? <a routerLink="/Register">Create an account</a>
+    </div>
+  </div>
+</div>

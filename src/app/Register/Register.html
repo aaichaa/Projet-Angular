@@ -1,0 +1,70 @@
+<div class="droit">
+  <router-outlet></router-outlet>
+  <span >Already have an account ? <a routerLink="/Login">Login</a></span>
+
+</div>
+<div class="d-flex justify-content-center align-items-center vh-100 bg-light">
+  <div class="p-4" style="width: 100%; max-width: 400px;">
+    <h3 class="text-center mb-4">Create an account</h3>
+
+    <form (ngSubmit)="register()">
+      <div class="mb-3">
+        <input type="text" class="form-control" placeholder="First name" name="firstname" [(ngModel)]="firstname" required />
+      </div>
+
+      <div class="mb-3">
+        <input type="text" class="form-control" placeholder="Last name" name="lastname" [(ngModel)]="lastname" required />
+      </div>
+
+      <div class="mb-3">
+        <input type="email" class="form-control" placeholder="Email" name="email" [(ngModel)]="email" required />
+      </div>
+
+      <!-- Mot de passe avec œil SVG -->
+      <div class="mb-3 position-relative">
+        <input
+          [type]="showPassword ? 'text' : 'password'"
+          class="form-control pe-5"
+          placeholder="Password"
+          name="password"
+          [(ngModel)]="password"
+          required
+        />
+        <button
+          *ngIf="password.length > 0"
+          type="button"
+          (click)="togglePassword()"
+          class="position-absolute top-50 end-0 translate-middle-y border-0 bg-transparent me-2"
+          tabindex="-1"
+          aria-label="Toggle password visibility"
+        >
+          <svg *ngIf="!showPassword" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8z"/>
+            <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+          </svg>
+          <svg *ngIf="showPassword" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M13.359 11.238l1.42 1.42a.5.5 0 0 1-.708.707l-1.42-1.42A8.354 8.354 0 0 1 8 13.5C3 13.5 0 8 0 8s1.479-2.71 3.781-4.53L1.146 1.854a.5.5 0 1 1 .708-.708l12 12a.5.5 0 0 1-.708.708l-1.787-1.787zM8 12.5c3.53 0 6.48-2.874 7.294-4.5C14.48 6.374 11.53 3.5 8 3.5c-.801 0-1.579.158-2.294.45l6.414 6.415c.293.362.551.738.803 1.12a.5.5 0 0 1-.707.707l-6.586-6.586a8.354 8.354 0 0 1-1.62 1.4z"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Conditions du mot de passe : rouge si non rempli, vert si rempli -->
+      <ul class="small">
+        <li [class.text-success]="hasMinLength" [class.text-danger]="!hasMinLength">• At least 8 characters</li>
+        <li [class.text-success]="hasUppercase" [class.text-danger]="!hasUppercase">• At least one uppercase letter</li>
+        <li [class.text-success]="hasLowercase" [class.text-danger]="!hasLowercase">• At least one lowercase letter</li>
+        <li [class.text-success]="hasNumber" [class.text-danger]="!hasNumber">• At least one number</li>
+        <li [class.text-success]="hasSpecialChar" [class.text-danger]="!hasSpecialChar">• At least one special character</li>
+      </ul>
+
+      <div class="mb-3">
+        <input type="text" class="form-control" placeholder="Address (optional)" name="adresse" [(ngModel)]="adresse" />
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100" [disabled]="!formIsValid">Register</button>
+
+      <div *ngIf="message" class="alert alert-success mt-3">{{ message }}</div>
+      <div *ngIf="error" class="alert alert-danger mt-3">{{ error }}</div>
+    </form>
+  </div>
+</div>

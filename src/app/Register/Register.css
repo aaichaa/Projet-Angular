@@ -1,0 +1,45 @@
+/* register.css */
+body {
+  background-color: #f6f8fa;
+}
+.droit {
+margin-left: 33cm;
+
+}
+
+form input.form-control:focus {
+  border-color: #0969da;
+  box-shadow: 0 0 0 1px #0969da;
+}
+
+.btn-primary {
+  background-color: #0969da;
+  border-color: #0969da;
+}
+
+.btn-primary:disabled {
+  background-color: #c0d3ec;
+  border-color: #c0d3ec;
+  cursor: not-allowed;
+}
+
+.alert {
+  font-size: 0.9rem;
+  padding: 0.5rem 0.75rem;
+}
+
+ul {
+  padding-left: 1.2rem;
+  margin-top: -0.5rem;
+  margin-bottom: 1rem;
+}
+
+ul li {
+  font-size: 0.85rem;
+}
+.text-danger {
+  color: red !important;
+}
+.text-success {
+  color: green !important;
+}

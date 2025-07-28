@@ -3,13 +3,13 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-mail',
+  selector: 'app-password_reset',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './mail.html',
-  styleUrls: ['./mail.css']
+  templateUrl: './password_reset.html',
+  styleUrls: ['./password_reset.css']
 })
-export class Mail {
+export class Password_reset {
   email = '';
   message = '';
   erreur = '';
