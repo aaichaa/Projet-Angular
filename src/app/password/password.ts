@@ -1,48 +1,51 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { RouterModule,RouterOutlet } from '@angular/router';
+import { Router} from '@angular/router';
+
 
 @Component({
   selector: 'app-password',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,RouterModule,RouterOutlet],
   templateUrl: './password.html',
   styleUrls: ['./password.css']
 })
 export class Password {
   newPassword = '';
   confirmPassword = '';
-  message = '';
   erreur = '';
   showPassword = false;
+  success = false; // 👈 utilisé pour basculer l’affichage
 
-  valider() {
+  constructor(private router: Router) {}
+
+  togglePassword(): void {
+    this.showPassword = !this.showPassword;
+  }
+
+  valider(): void {
     this.erreur = '';
-    this.message = '';
 
     const pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d\s]).{8,}$/;
 
     if (!this.newPassword || !this.confirmPassword) {
-      this.erreur = 'Tous les champs sont obligatoires.';
+      this.erreur = 'All fields are required.';
       return;
     }
 
     if (!pattern.test(this.newPassword)) {
-      this.erreur = 'Le mot de passe doit contenir au moins 8 caractères avec une majuscule, une minuscule, un chiffre et un caractère spécial.';
+      this.erreur = 'Password must contain at least 8 characters, an uppercase letter, a lowercase letter, a number, and a special character.';
       return;
     }
 
     if (this.newPassword !== this.confirmPassword) {
-      this.erreur = 'Les mots de passe ne correspondent pas.';
+      this.erreur = 'Passwords do not match.';
       return;
     }
 
-    this.message = 'Mot de passe mis à jour avec succès ✅';
-    this.newPassword = '';
-    this.confirmPassword = '';
-  }
-
-  togglePassword() {
-    this.showPassword = !this.showPassword;
+    // ✅ Le mot de passe est validé → afficher message de succès
+    this.success = true;
   }
 }
